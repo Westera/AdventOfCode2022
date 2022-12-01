@@ -12,6 +12,10 @@ public class DailyInputReader {
         return input.lines();
     }
 
+    public static String getInputAsString(String path) throws IOException {
+        return Files.readString(Paths.get(path));
+    }
+
     public static Stream<String> getInputFileToLines(String path) throws IOException {
         return Files.lines(Paths.get(path));
     }
