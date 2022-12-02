@@ -12,11 +12,13 @@ public class Day01 extends Day {
     public Day01() {
 
     }
-    public static void main(String[] args){
-        new Day01("src/main/resources/Day01/input");
-    }
+
     public Day01(String input) {
         super(input);
+    }
+
+    public static void main(String[] args){
+        new Day01("src/main/resources/Day01/input");
     }
 
     @Override
