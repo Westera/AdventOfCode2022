@@ -21,11 +21,7 @@ public class Day02 extends Day {
     @Override
     public String part1(String path) {
         try {
-            int result = DailyInputReader.getInputFileToLines(path).mapToInt(row -> {
-                String[] choices = row.split(" ");
-                return calculateScoreV1(choices[0], choices[1]);
-            }).sum();
-
+            int result = DailyInputReader.getInputFileToLines(path).mapToInt(row -> calculateScoreV1(row.charAt(0), row.charAt(2))).sum();
             return String.format("Total Score: %d", result);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -35,26 +31,22 @@ public class Day02 extends Day {
     @Override
     public String part2(String path) {
         try {
-            int result = DailyInputReader.getInputFileToLines(path).mapToInt(row -> {
-                String[] choices = row.split(" ");
-                return calculateScoreV2(choices[0], choices[1]);
-            }).sum();
-
+            int result = DailyInputReader.getInputFileToLines(path).mapToInt(row -> calculateScoreV2(row.charAt(0), row.charAt(2))).sum();
             return String.format("Total Score: %d", result);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private int calculateScoreV1(String them, String you) {
-        int resultPoint = (((you.charAt(0) - 87 - (them.charAt(0) - 64) + 3) % 3) + 1) % 3 * 3;
-        int choicePoint = you.charAt(0) - 87;
+    private int calculateScoreV1(char them, char you) {
+        int resultPoint = (((you - 'X' - them + 'A' + 3) % 3) + 1) % 3 * 3;
+        int choicePoint = you - 'X' + 1;
         return resultPoint + choicePoint;
     }
 
-    private int calculateScoreV2(String them, String wantedResult) {
-        int resultPoint = (wantedResult.charAt(0) - 88) * 3;
-        int choicePoint = (them.charAt(0) + wantedResult.charAt(0) - 89 + 1) % 3 + 1;
+    private int calculateScoreV2(char them, char wantedResult) {
+        int resultPoint = (wantedResult - 'X') * 3;
+        int choicePoint = (them + wantedResult - 'X') % 3 + 1;
         return resultPoint + choicePoint;
     }
 }
