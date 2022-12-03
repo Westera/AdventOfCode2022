@@ -14,7 +14,8 @@ public class Day02 extends Day {
     public Day02(String input) {
         super(input);
     }
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         new Day02("src/main/resources/Day02/input");
     }
 

@@ -1,13 +1,13 @@
 package aoc2022.util;
 
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class DailyInputReader {
+
     public static Stream<String> getInputLineByLine(String input) {
         return input.lines();
     }

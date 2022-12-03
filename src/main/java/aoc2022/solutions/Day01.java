@@ -4,7 +4,8 @@ import aoc2022.util.DailyInputReader;
 import aoc2022.util.Day;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.stream.IntStream;
 
 public class Day01 extends Day {
@@ -17,7 +18,7 @@ public class Day01 extends Day {
         super(input);
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         new Day01("src/main/resources/Day01/input");
     }
 

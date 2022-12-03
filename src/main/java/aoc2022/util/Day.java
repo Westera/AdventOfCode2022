@@ -6,7 +6,7 @@ public abstract class Day {
 
     }
 
-    public Day(String input){
+    public Day(String input) {
         printSolutions(input);
     }
 
@@ -16,7 +16,7 @@ public abstract class Day {
 
     public void printSolutions(String input) {
         System.out.printf("Todays solutions are:\n" +
-                                 "Part 1: %s\n" +
-                                 "Part 2: %s", part1(input), part2(input));
+                "Part 1: %s\n" +
+                "Part 2: %s", part1(input), part2(input));
     }
 }
