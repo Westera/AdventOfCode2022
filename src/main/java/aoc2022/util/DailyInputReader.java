@@ -21,8 +21,7 @@ public class DailyInputReader {
     }
 
     public static Stream<Character> getInputCharByChar(String input) {
-        return input.chars()
-                .mapToObj(c -> (char) c);
+        return input.chars().mapToObj(c -> (char) c);
     }
 
     public static Stream<String> getInputSplitOnX(String input, String x) {

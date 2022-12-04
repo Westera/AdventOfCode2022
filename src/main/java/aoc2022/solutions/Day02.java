@@ -5,6 +5,9 @@ import aoc2022.util.Day;
 
 import java.io.IOException;
 
+interface ScoreCalculator {
+    int calcScore(char them, char you);
+}
 public class Day02 extends Day {
 
     public Day02() {
@@ -21,19 +24,22 @@ public class Day02 extends Day {
 
     @Override
     public String part1(String path) {
-        try {
-            int result = DailyInputReader.getInputFileToLines(path).mapToInt(row -> calculateScoreV1(row.charAt(0), row.charAt(2))).sum();
-            return String.format("Total Score: %d", result);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        ScoreCalculator calculator = this::calculateScoreV1;
+        return String.format("Total Score: %d", calculateScore(path, calculator));
     }
 
     @Override
     public String part2(String path) {
+        ScoreCalculator calculator = this::calculateScoreV2;
+        return String.format("Total Score: %d", calculateScore(path, calculator));
+
+    }
+
+    private int calculateScore(String path, ScoreCalculator calculator) {
         try {
-            int result = DailyInputReader.getInputFileToLines(path).mapToInt(row -> calculateScoreV2(row.charAt(0), row.charAt(2))).sum();
-            return String.format("Total Score: %d", result);
+            return DailyInputReader.getInputFileToLines(path).
+                    mapToInt(row -> calculator.calcScore(row.charAt(0), row.charAt(2))).sum();
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
