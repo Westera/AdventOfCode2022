@@ -6,7 +6,6 @@ import aoc2022.util.Day;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class Day06 extends Day {
@@ -36,16 +35,13 @@ public class Day06 extends Day {
     private int getIndexOfFirstXUniqueCharacters(String path, int numberOfUniqueCharacters) {
         try {
             String inputString = DailyInputReader.getInputAsString(path);
-            AtomicInteger counter = new AtomicInteger();
             List<Character> characters = new ArrayList<>();
             DailyInputReader.getInputCharByChar(inputString).
-                    takeWhile(i -> counter.get() != numberOfUniqueCharacters).forEachOrdered(c -> {
+                    takeWhile(i -> characters.size() != numberOfUniqueCharacters).forEachOrdered(c -> {
                         while (characters.contains(c)) {
                             characters.remove(0);
-                            counter.decrementAndGet();
                         }
                         characters.add(c);
-                        counter.incrementAndGet();
                     });
             String uniqueString = characters.stream().map(String::valueOf)
                     .collect(Collectors.joining());
