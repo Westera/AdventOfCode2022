@@ -8,6 +8,7 @@ import java.io.IOException;
 interface ScoreCalculator {
     int calcScore(char them, char you);
 }
+
 public class Day02 extends Day {
 
     public Day02() {

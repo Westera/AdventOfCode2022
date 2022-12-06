@@ -11,8 +11,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 interface Crane {
-    void move(Stream<List<Integer>>instructions, Stack<String>[] columns);
+    void move(Stream<List<Integer>> instructions, Stack<String>[] columns);
 }
+
 public class Day05 extends Day {
 
     public Day05() {
@@ -42,7 +43,7 @@ public class Day05 extends Day {
     private String moveBoxes(Crane crane, String path) {
         try {
             List<String> splitInputData = DailyInputReader.getInputSplitOnX(DailyInputReader.
-                    getInputAsString(path),"\n\n").toList();
+                    getInputAsString(path), "\n\n").toList();
             Stack<String>[] stacks = getStacksOfBoxes(splitInputData.get(0));
             crane.move(DailyInputReader.getInputLineByLine(splitInputData.get(1)).
                     map(row -> DailyInputReader.getInputSplitOnX(row, "move|from|to| ").
@@ -56,12 +57,12 @@ public class Day05 extends Day {
 
     private Stack<String>[] getStacksOfBoxes(String input) {
         List<String> rows = DailyInputReader.getInputLineByLine(input).filter(s -> !s.contains("1")).toList();
-        int numberOfColumns = rows.get(rows.size()-1).replaceAll(" ", "").length()/3;
+        int numberOfColumns = rows.get(rows.size() - 1).replaceAll(" ", "").length() / 3;
         Stack<String>[] stacks = new Stack[numberOfColumns];
-        for(int i = rows.size()-1 ; i >= 0 ; i--) {
+        for (int i = rows.size() - 1; i >= 0; i--) {
             String row = rows.get(i);
-            for(int j = 0, column = 0 ; j < row.length() ; j = j + 4, column++) {
-                String box = row.substring(j, j+3);
+            for (int j = 0, column = 0; j < row.length(); j = j + 4, column++) {
+                String box = row.substring(j, j + 3);
                 if (!box.equals("   ")) {
                     Stack<String> stack = stacks[column];
                     if (stack == null) {
@@ -77,9 +78,9 @@ public class Day05 extends Day {
 
     private void moveOneByOne(Stream<List<Integer>> instructions, Stack<String>[] columns) {
         instructions.forEachOrdered(instruction -> {
-            Stack<String> from = columns[instruction.get(1)-1], to = columns[instruction.get(2)-1];
+            Stack<String> from = columns[instruction.get(1) - 1], to = columns[instruction.get(2) - 1];
 
-            for (int i = 0 ; i < instruction.get(0) ; i++) {
+            for (int i = 0; i < instruction.get(0); i++) {
                 to.push(from.pop());
             }
         });
