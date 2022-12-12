@@ -2,6 +2,7 @@ package aoc2022.solutions;
 
 import aoc2022.util.DailyInputReader;
 import aoc2022.util.Day;
+import aoc2022.util.Point;
 
 import java.io.IOException;
 import java.util.*;
@@ -32,7 +33,7 @@ public class Day09 extends Day {
                 for (int i = 0; i < loop; i++) {
                     moveHead(row.get(0), head);
                     moveTail(head, tail);
-                    visited.add(new Point(tail.x, tail.y));
+                    visited.add(new Point(tail.getX(), tail.getY()));
                 }
             });
             return String.format("Visited: %d", visited.size());
@@ -59,7 +60,7 @@ public class Day09 extends Day {
                         moveTail(tails.get(j - 1), tails.get(j));
                     }
 
-                    visited.add(new Point(tails.get(tails.size() - 1).x, tails.get(tails.size() - 1).y));
+                    visited.add(new Point(tails.get(tails.size() - 1).getX(), tails.get(tails.size() - 1).getY()));
                 }
             });
             return String.format("Visited: %d", visited.size());
@@ -70,47 +71,23 @@ public class Day09 extends Day {
 
     private void moveHead(String direction, Point head) {
         switch (direction) {
-            case "L" -> head.x = head.x - 1;
-            case "R" -> head.x = head.x + 1;
-            case "D" -> head.y = head.y - 1;
-            case "U" -> head.y = head.y + 1;
+            case "L" -> head.setX(head.getX() - 1);
+            case "R" -> head.setX(head.getX() + 1);
+            case "D" -> head.setY(head.getY() - 1);
+            case "U" -> head.setY(head.getY() + 1);
         }
     }
 
     private void moveTail(Point head, Point tail) {
-        if (Math.abs(head.x - tail.x) == 2 && Math.abs(head.y - tail.y) == 1) {
-            tail.x = tail.x + (tail.x - head.x) / -2;
-            tail.y = tail.y + (tail.y - head.y) * -1;
-        } else if (Math.abs(head.y - tail.y) == 2 && Math.abs(head.x - tail.x) == 1) {
-            tail.x = tail.x + (tail.x - head.x) * -1;
-            tail.y = tail.y + (tail.y - head.y) / -2;
-        } else if (Math.abs(head.x - tail.x) == 2 || Math.abs(head.y - tail.y) == 2) {
-            tail.x = tail.x + (tail.x - head.x) / -2;
-            tail.y = tail.y + (tail.y - head.y) / -2;
-        }
-    }
-
-    private static class Point {
-
-        private int x;
-        private int y;
-
-        public Point(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(x, y);
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj instanceof Point) {
-                return x == ((Point) obj).x && y == ((Point) obj).y;
-            }
-            return false;
+        if (Math.abs(head.getX() - tail.getX()) == 2 && Math.abs(head.getY() - tail.getY()) == 1) {
+            tail.setX(tail.getX() + (tail.getX() - head.getX()) / -2);
+            tail.setY(tail.getY() + (tail.getY() - head.getY()) * -1);
+        } else if (Math.abs(head.getY() - tail.getY()) == 2 && Math.abs(head.getX() - tail.getX()) == 1) {
+            tail.setX(tail.getX() + (tail.getX() - head.getX()) * -1);
+            tail.setY(tail.getY() + (tail.getY() - head.getY()) / -2);
+        } else if (Math.abs(head.getX() - tail.getX()) == 2 || Math.abs(head.getY() - tail.getY()) == 2) {
+            tail.setX(tail.getX() + (tail.getX() - head.getX()) / -2);
+            tail.setY(tail.getY() + (tail.getY() - head.getY()) / -2);
         }
     }
 }
